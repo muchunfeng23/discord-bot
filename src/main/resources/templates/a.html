@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>趋势分析</title>
+    <style>
+        .detail-item {
+            margin-bottom: 25px; /* 每个条目之间的间距 */
+        }
+        .detail-item label {
+            display: inline-block;
+            width: 200px; /* 标签的宽度 */
+            font-weight: bold; /* 标签加粗 */
+        }
+        .detail-item div {
+            width: 1000px; /* 标签的宽度 */
+            display: inline-block; /* 内容和标签在同一行 */
+            word-wrap: break-word; /* 超过宽度时自动换行 */
+            overflow-wrap: break-word; /* 现代浏览器兼容性更好 */
+            vertical-align: top; /* 确保对齐顶部，避免内容偏移 */
+        }
+    </style>
+</head>
+<body>
+<h1>交易需要等待</h1>
+<p style="font-weight: bold; color: green;" th:text="${returnData.getUpDownDesc()}"></p>
+<p style="font-weight: bold; color: green;" th:text="${returnData.getTrendDesc()}"></p>
+<p style="font-weight: bold; color: darkred;" th:text="${returnData.getBigPowerSymbolDesc()}"></p>
+<p style="font-weight: bold; color: darkred;" >【【【下单时要注意15分钟K线的走势，以及当前价格和K线的价差】】】</p>
+<br>
+
+<div th:each="statusDetail : ${returnData.getStatusDetailList()}" class="detail-item">
+    <!-- 时间 -->
+    <label>时间：</label>
+    <div th:text="${statusDetail.getCreateDateStr()}"
+         th:style="${statusDetail.getWordColor()}"/>
+    <br>
+    <!-- 状态 -->
+    <label>状态：</label>
+    <div th:text="${statusDetail.getStatusDesc()}"
+         th:style="${statusDetail.getWordColor()}"/>
+    <br>
+    <!-- 大能量币种 -->
+    <label>大能量币种【<span th:text="${statusDetail.getBigPowerAvgPercent()}"></span>】：</label>
+    <div th:text="${statusDetail.getBigPowerSymbols()}"
+         th:style="${statusDetail.getWordColor()}"
+    />
+    <br>
+    <!-- 潜力币种 -->
+    <label>潜力币种：</label>
+    <div th:text="${statusDetail.getMaybeActionSymbols()}" style="font-weight: bold; color: green;"/>
+    <br>
+    <!-- 下跌考虑 -->
+    <label>下跌考虑：</label>
+    <div th:text="${statusDetail.getMaybeDownSymbols()}" style="font-weight: bold; color: darkred;"/>
+    <br>
+</div>
+
+</body>
+</html>

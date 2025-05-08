@@ -1,0 +1,23 @@
+server:
+  port: 8082
+  shutdown: graceful
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  datasource:
+    url: jdbc:mysql://47.91.3.189:3562/strategy?useUnicode=true&characterEncoding=utf-8&&zeroDateTimeBehavior=convertToNull
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: yanglu
+    password: yanglu86
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      test-on-borrow: false
+      test-while-idle: true
+
+logging:
+  level:
+    root: error
+
+discord:
+  bot:
+    token: MTM2ODU5ODQ5NTUzNTAzODQ4NA.GAa-ux.m2BGTp9MeYM-p4OT4hGg8HldQSjjHvYwtayAgc
